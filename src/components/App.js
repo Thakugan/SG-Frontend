@@ -24,9 +24,13 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-            <header className="App-header mt-5">
-              <h1 className="App-title">Statgeek Analytics Demo</h1>
-            </header>
+            <Link to="/">
+              <header className="App-header mt-5">
+                <h1 className="App-title" style={{ color: "black" }}>
+                  Statgeek Analytics Demo
+                </h1>
+              </header>
+            </Link>
             <Route exact path="/" component={Landing} />
             <Route exact path="/team" component={Team} />
           </div>
