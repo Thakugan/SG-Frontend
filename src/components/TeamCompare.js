@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
-class TeamStats extends Component {
+class TeamCompare extends Component {
   //   onComponentDidMount() {
   //     this.props.names = this.props.getTeamNames();
   //   }
@@ -11,12 +11,11 @@ class TeamStats extends Component {
   render() {
     return (
       <div>
-        <h2>Team Stats</h2>
+        <h2>Team Comparison</h2>
         {/* <p>{this.props.names}</p> */}
       </div>
     );
   }
 }
 
-export default connect(null, actions)(TeamStats);
-
+export default connect(null, actions)(TeamCompare);
