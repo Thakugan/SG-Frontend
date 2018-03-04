@@ -25,9 +25,6 @@ const Landing = () => (
   </div>
 );
 
-const Stats = () => <h2>Team</h2>;
-const Comparison = () => <h2>Team</h2>;
-
 class App extends Component {
   render() {
     return (
