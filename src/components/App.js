@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import TeamStats  from "./TeamStats.js"
 import TeamCompare from "./TeamCompare.js"
 import * as actions from "../actions";
+import './App.css';
 
 const Landing = () => (
   <div>
