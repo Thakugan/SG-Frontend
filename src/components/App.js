@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import TeamStats from "./TeamStats.js";
+import TeamCompare from "./TeamCompare.js";
 import * as actions from "../actions";
 
 const Landing = () => (
@@ -9,14 +10,19 @@ const Landing = () => (
       The purpose of this demo site is to display working functionality of the
       Statgeek Analytics API. To get started, pick an action from below.
     </p>
-    <div className="row mt-5">
-      <Link to="/team" className="btn btn-dark" style={{ margin: "0 10px" }}>
-        See Team Stats
-      </Link>
+    <div className="container row">
+      <div>
+        <Link to="/stats" className="btn btn-dark">
+          See Team Stats
+        </Link>
+
+        <Link to="/compare" className="btn btn-dark ml-3">
+          Compare Teams
+        </Link>
+      </div>
     </div>
   </div>
 );
-const Team = () => <h2>Team</h2>;
 
 class App extends Component {
   render() {
@@ -32,7 +38,8 @@ class App extends Component {
               </header>
             </Link>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/team" component={Team} />
+            <Route exact path="/stats" component={TeamStats} />
+            <Route exact path="/compare" component={TeamCompare} />
           </div>
         </BrowserRouter>
       </div>
@@ -40,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default App;
