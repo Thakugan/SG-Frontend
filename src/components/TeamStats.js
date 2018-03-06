@@ -4,15 +4,17 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class TeamStats extends Component {
-  //   onComponentDidMount() {
-  //     this.props.names = this.props.getTeamNames();
-  //   }
+  renderNames() {
+    this.props.names = this.props.getTeamNames();
+    alert(JSON.stringify(this.props.names));
+    return <p>{this.props.names}</p>;
+  }
 
   render() {
     return (
       <div>
         <h2>Team Stats</h2>
-        {/* <p>{this.props.names}</p> */}
+        {this.renderNames()}
       </div>
     );
   }
