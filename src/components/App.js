@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import TeamStats from "./TeamStats.js";
 import TeamCompare from "./TeamCompare.js";
-import * as actions from "../actions";
 
 const Landing = () => (
   <div>

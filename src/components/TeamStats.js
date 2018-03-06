@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import * as actions from "../actions";
 
 class TeamStats extends Component {
+  teamNames() {}
+
   render() {
     return (
       <div>

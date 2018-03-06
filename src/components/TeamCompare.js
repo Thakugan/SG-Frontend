@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as actions from "../actions";
 
 class TeamCompare extends Component {
   render() {
