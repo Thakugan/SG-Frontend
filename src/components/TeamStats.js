@@ -50,7 +50,22 @@ class TeamStats extends Component {
 
         {this.state ? (
           this.state.stats ? (
-            <p>{JSON.stringify(this.state.stats)}</p>
+            <div>
+              <p>Team: {this.state.stats.team}</p>
+              <p>
+                Division: {this.state.stats.division} League:{" "}
+                {this.state.stats.league}
+              </p>
+              <p>ORebs: {this.state.stats.ORebs}</p>
+              <p>DRebs: {this.state.stats.DRebs}</p>
+              <p>FG3: {this.state.stats.FG3}</p>
+              <p>FTA: {this.state.stats.FTA}</p>
+              <p>FGA: {this.state.stats.FGA}</p>
+              <p>TO: {this.state.stats.TO}</p>
+              <p>FT: {this.state.stats.FT}</p>
+              <p>WL: {this.state.stats.WL}</p>
+              <p>FGM: {this.state.stats.FGM}</p>
+            </div>
           ) : null
         ) : null}
       </div>
