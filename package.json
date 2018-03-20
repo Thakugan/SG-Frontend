@@ -2,7 +2,7 @@
   "name": "sg-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://thakugan.github.io/SG-Frontend",
+  "homepage": "http://hooplife.site",
   "dependencies": {
     "axios": "^0.18.0",
     "jquery": "^3.3.1",
