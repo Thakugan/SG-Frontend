@@ -7,7 +7,17 @@ class TeamStats extends Component {
     return (
       <div>
         <h2>Team Stats</h2>
-        <p>Pick a team: </p>
+        <div class="dropdown">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Pick a team
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Team 1</a>
+            <a class="dropdown-item" href="#">Team 2</a>
+            <a class="dropdown-item" href="#">Team 3</a>
+          </div>
+        </div> 
+
         <div class="container row">
           <table class="table table-striped table-bordered fixed">
             <col width="100px" />
@@ -19,6 +29,10 @@ class TeamStats extends Component {
               </tr>
               <tr>
                 <td>League</td>
+                <td />
+              </tr>
+              <tr>
+                <td>Division</td>
                 <td />
               </tr>
               <tr>
@@ -51,6 +65,10 @@ class TeamStats extends Component {
               </tr>
               <tr>
                 <td>DRebs</td>
+                <td />
+              </tr>
+              <tr>
+                <td>WL</td>
                 <td />
               </tr>
             </tbody>
