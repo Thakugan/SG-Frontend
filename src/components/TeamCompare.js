@@ -31,6 +31,14 @@ class TeamCompare extends Component {
     });
   };
 
+  teamCompare = event => {
+    axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2).then(res => {
+      this.setState({ comparison: res.data });
+    });
+  };
+
+
+
   
   render() {
     
@@ -96,7 +104,7 @@ class TeamCompare extends Component {
               ) : null
           ) : null}
 
-          <h1 style={{ margin: "auto", fontSize: "300%" }}>VS</h1>
+          
           {this.state ? (
               this.state.stats2 ? (
                 <div style = {{marginLeft: "auto"}}>
@@ -110,6 +118,31 @@ class TeamCompare extends Component {
               ) : null
           ) : null}
         </div>
+        {this.state ? (
+              this.state.stats2 ? (
+                  this.state.stats ? (
+                        <div>
+                          <button type="button" class="btn btn-primary"style = {{marginLeft: "500px"}}
+                          onClick={this.teamCompare}>
+                            See this matchup
+                          </button>
+                          
+
+                        </div>
+                        
+                  ) : null
+                  
+              ) : null
+          ) : null}
+
+        {this.state ? (
+            this.state.comparison ? (
+                <p> 
+                  {this.state.comparison}
+                </p>
+            ) : null
+
+        ) : null}
       </div>
     );
   }
