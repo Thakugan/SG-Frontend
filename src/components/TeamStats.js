@@ -16,9 +16,17 @@ class TeamStats extends Component {
   }
 
   teamSelected = event => {
-    this.setState({ team: event.target.value });
+    console.log("Team selected: " + event.target.value);
+    this.setState({ team: event.target.value }, () => {
+      this.updateDisplay();
+    });
+  };
+
+  updateDisplay = () => {
+    console.log(this.state.team);
     axios.get("http://54.147.204.57:5000/team/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
+      console.log(this.state.stats);
     });
   };
 
