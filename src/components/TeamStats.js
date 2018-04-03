@@ -1,79 +1,81 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class TeamStats extends Component {
-  teamNames() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      names: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get("http://54.147.204.57:5000/names").then(res => {
+      this.setState({ names: res.data });
+    });
+  }
+
+  teamSelected = event => {
+    console.log("Team selected: " + event.target.value);
+    this.setState({ team: event.target.value }, () => {
+      this.updateDisplay();
+    });
+  };
+
+  updateDisplay = () => {
+    console.log(this.state.team);
+    axios.get("http://54.147.204.57:5000/team/" + this.state.team).then(res => {
+      this.setState({ stats: res.data });
+      console.log(this.state.stats);
+    });
+  };
 
   render() {
     return (
       <div>
         <h2>Team Stats</h2>
-        <div class="dropdown">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            Pick a team
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Team 1</a>
-            <a class="dropdown-item" href="#">Team 2</a>
-            <a class="dropdown-item" href="#">Team 3</a>
+        <form style={{ width: "50%" }}>
+          <div className="form-group">
+            <label htmlFor="team" />
+            <select
+              className="form-control"
+              id="team"
+              onChange={this.teamSelected}
+            >
+              <option>Select a Team</option>/>
+              {this.state
+                ? this.state.names.map(function(name) {
+                    return (
+                      <option key={name} value={name}>
+                        {name}
+                      </option>
+                    );
+                  })
+                : null}
+            </select>
           </div>
-        </div> 
+        </form>
 
-        <div class="container row">
-          <table class="table table-striped table-bordered fixed">
-            <col width="100px" />
-            <col width="100px" />
-            <tbody>
-              <tr>
-                <td>Team</td>
-                <td />
-              </tr>
-              <tr>
-                <td>League</td>
-                <td />
-              </tr>
-              <tr>
-                <td>Division</td>
-                <td />
-              </tr>
-              <tr>
-                <td>FGM</td>
-                <td />
-              </tr>
-              <tr>
-                <td>FG3</td>
-                <td />
-              </tr>
-              <tr>
-                <td>FGA</td>
-                <td />
-              </tr>
-              <tr>
-                <td>TO</td>
-                <td />
-              </tr>
-              <tr>
-                <td>FTA</td>
-                <td />
-              </tr>
-              <tr>
-                <td>FT</td>
-                <td />
-              </tr>
-              <tr>
-                <td>ORebs</td>
-                <td />
-              </tr>
-              <tr>
-                <td>DRebs</td>
-                <td />
-              </tr>
-              <tr>
-                <td>WL</td>
-                <td />
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {this.state ? (
+          this.state.stats ? (
+            <div>
+              <p>Team: {this.state.stats.team}</p>
+              <p>
+                Division: {this.state.stats.division} League:{" "}
+                {this.state.stats.league}
+              </p>
+              <p>ORebs: {this.state.stats.ORebs}</p>
+              <p>DRebs: {this.state.stats.DRebs}</p>
+              <p>FG3: {this.state.stats.FG3}</p>
+              <p>FTA: {this.state.stats.FTA}</p>
+              <p>FGA: {this.state.stats.FGA}</p>
+              <p>TO: {this.state.stats.TO}</p>
+              <p>FT: {this.state.stats.FT}</p>
+              <p>WL: {this.state.stats.WL}</p>
+              <p>FGM: {this.state.stats.FGM}</p>
+            </div>
+          ) : null
+        ) : null}
       </div>
     );
   }

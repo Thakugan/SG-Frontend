@@ -18,14 +18,24 @@ class TeamCompare extends Component {
   }
 
   teamSelected = event => {
-    this.setState({ team: event.target.value });
+    this.setState({ team: event.target.value }, () => {
+      this.updateDisplay();
+    });
+  };
+
+  teamSelected2 = event => {
+    this.setState({ team2: event.target.value }, () => {
+      this.updateDisplay2();
+    });
+  };
+
+  updateDisplay = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
     });
   };
 
-  teamSelected2 = event => {
-    this.setState({ team2: event.target.value });
+  updateDisplay2 = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.team2).then(res => {
       this.setState({ stats2: res.data });
     });
@@ -36,8 +46,6 @@ class TeamCompare extends Component {
       this.setState({ comparison: res.data });
     });
   };
-
-
 
   
   render() {
