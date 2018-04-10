@@ -42,7 +42,8 @@ class TeamCompare extends Component {
   };
 
   teamCompare = event => {
-    axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2).then(res => {
+    axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2
+    + "/" + this.state.stats.league).then(res => {
       this.setState({ comparison: res.data });
     });
   };
@@ -54,6 +55,14 @@ class TeamCompare extends Component {
       <div>
         <h2>Team Comparison</h2>
         
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select League
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Men's Basketball</a></li>
+            <li><a href="#">Women's Basketball</a></li>
+          </ul>
+        </div> 
         <form class = "form-inline" style = {{ marginLeft: "15px", marginTop: "10px"}}>
           <div class = "row">
             <div className="form-group">           
@@ -104,8 +113,7 @@ class TeamCompare extends Component {
                 <div style = {{marginLeft: "15px"}}>
                   <h4>Team: {this.state.stats.team}</h4>
                   <p>
-                    Division: {this.state.stats.division} League:{" "}
-                    {this.state.stats.league}
+                    Division: {this.state.stats.division}                    
                   </p>
                   
                 </div>
@@ -118,9 +126,8 @@ class TeamCompare extends Component {
                 <div style = {{marginLeft: "auto"}}>
                   <h4>Team: {this.state.stats2.team}</h4>
                   <p>
-                    Division: {this.state.stats2.division} League:{" "}
-                    {this.state.stats2.league}
-                  </p>
+                    Division: {this.state.stats2.division}                    
+                  </p>                  
                   
                 </div>
               ) : null
@@ -130,7 +137,7 @@ class TeamCompare extends Component {
               this.state.stats2 ? (
                   this.state.stats ? (
                         <div>
-                          <button type="button" class="btn btn-primary"style = {{marginLeft: "500px"}}
+                          <button type="button" class="btn btn-primary"style = {{marginLeft: "490px", marginTop: "20px"}}
                           onClick={this.teamCompare}>
                             See this matchup
                           </button>
