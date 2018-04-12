@@ -59,8 +59,8 @@ class TeamCompare extends Component {
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select League
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a href="#">Men's Basketball</a></li>
-            <li><a href="#">Women's Basketball</a></li>
+            <li>Men's Basketball</li>
+            <li>Women's Basketball</li>
           </ul>
         </div> 
         <form class = "form-inline" style = {{ marginLeft: "15px", marginTop: "10px"}}>
