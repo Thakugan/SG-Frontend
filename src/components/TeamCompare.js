@@ -18,12 +18,14 @@ class TeamCompare extends Component {
   }
 
   teamsLeague = event => {
-    if (event.target.value == "Men's Basketball")
-      this.state.league = "MBB";
+    if (event.target.value === "Men's Basketball")
+      this.setState({league: "MBB"}, () => {this.setLeague(); });
     else
-      this.state.league = "WBB";
-    console.log(this.state.league);
-    
+      this.setState({league: "WBB"}, () => {this.setLeague(); });   
+  };
+
+  setLeague = () => {
+      console.log(this.state.league);
   };
 
   teamSelected = event => {
@@ -81,50 +83,52 @@ class TeamCompare extends Component {
           </div>
 
           
-          
-          <div class = "row" style= {{marginTop: "20px"}}>
-            <div className="form-group">           
-                <label htmlFor="team" />
-                <select
-                  className="form-control"
-                  id="team"
-                  onChange={this.teamSelected}
-                >
-                  <option selected="true" disabled="disabled">Select First Team</option>/>
-                  {this.state
-                    ? this.state.names.map(function(name) {
-                        return (
-                          <option key={name} value={name}>
-                            {name}
-                          </option>
-                        );
-                      })
-                    : null}
-                </select>
-              
-            </div>
-            
-            <div className="form-group" style = {{marginLeft: "424px"}}>           
-                <label htmlFor="team" />
-                <select
-                  className="form-control"
-                  id="team"
-                  onChange={this.teamSelected2}                
-                >
-                  <option selected="true" disabled="disabled">Select Second Team</option>/>
-                  {this.state
-                    ? this.state.names.map(function(name) {
-                        return (
-                          <option key={name} value={name}>
-                            {name}
-                          </option>
-                        );
-                      })
-                    : null}
-                </select>           
-            </div>            
-          </div>
-              
+          {this.state ? (
+            this.state.league ? (
+              <div class = "row" style= {{marginTop: "20px"}}>
+                <div className="form-group">           
+                    <label htmlFor="team" />
+                    <select
+                      className="form-control"
+                      id="team"
+                      onChange={this.teamSelected}
+                    >
+                      <option selected="true" disabled="disabled">Select First Team</option>/>
+                      {this.state
+                        ? this.state.names.map(function(name) {
+                            return (
+                              <option key={name} value={name}>
+                                {name}
+                              </option>
+                            );
+                          })
+                        : null}
+                    </select>
+                  
+                </div>
+                
+                <div className="form-group" style = {{marginLeft: "424px"}}>           
+                    <label htmlFor="team" />
+                    <select
+                      className="form-control"
+                      id="team"
+                      onChange={this.teamSelected2}                
+                    >
+                      <option selected="true" disabled="disabled">Select Second Team</option>/>
+                      {this.state
+                        ? this.state.names.map(function(name) {
+                            return (
+                              <option key={name} value={name}>
+                                {name}
+                              </option>
+                            );
+                          })
+                        : null}
+                    </select>           
+                </div>            
+              </div>
+            ) : null
+        ) : null}      
           
           
         </form>
