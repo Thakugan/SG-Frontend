@@ -17,6 +17,15 @@ class TeamCompare extends Component {
     });
   }
 
+  teamsLeague = event => {
+    if (event.target.value == "Men's Basketball")
+      this.state.league = "MBB";
+    else
+      this.state.league = "WBB";
+    console.log(this.state.league);
+    
+  };
+
   teamSelected = event => {
     this.setState({ team: event.target.value }, () => {
       this.updateDisplay();
@@ -30,20 +39,20 @@ class TeamCompare extends Component {
   };
 
   updateDisplay = () => {
-    axios.get("http://54.147.204.57:5000/team/" + this.state.team).then(res => {
+    axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
     });
   };
 
   updateDisplay2 = () => {
-    axios.get("http://54.147.204.57:5000/team/" + this.state.team2).then(res => {
+    axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team2).then(res => {
       this.setState({ stats2: res.data });
     });
   };
 
   teamCompare = event => {
     axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2
-    + "/" + this.state.stats.league).then(res => {
+    + "/" + this.state.league).then(res => {
       this.setState({ comparison: res.data });
     });
   };
@@ -55,16 +64,25 @@ class TeamCompare extends Component {
       <div>
         <h2>Team Comparison</h2>
         
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select League
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li>Men's Basketball</li>
-            <li>Women's Basketball</li>
-          </ul>
-        </div> 
         <form class = "form-inline" style = {{ marginLeft: "15px", marginTop: "10px"}}>
           <div class = "row">
+            <div className="form-group">
+              <label htmlFor="team" />
+              <select
+                className="form-control"
+                id="league"
+                onChange={this.teamsLeague}
+              >
+                <option selected="true" disabled="disabled">Select Men or Women</option>
+                <option>Men's Basketball</option>
+                <option>Women's Basketball</option>
+              </select>
+            </div>
+          </div>
+
+          
+          
+          <div class = "row" style= {{marginTop: "20px"}}>
             <div className="form-group">           
                 <label htmlFor="team" />
                 <select
@@ -72,7 +90,7 @@ class TeamCompare extends Component {
                   id="team"
                   onChange={this.teamSelected}
                 >
-                  <option>Select First Team</option>/>
+                  <option selected="true" disabled="disabled">Select First Team</option>/>
                   {this.state
                     ? this.state.names.map(function(name) {
                         return (
@@ -93,7 +111,7 @@ class TeamCompare extends Component {
                   id="team"
                   onChange={this.teamSelected2}                
                 >
-                  <option>Select Second Team</option>/>
+                  <option selected="true" disabled="disabled">Select Second Team</option>/>
                   {this.state
                     ? this.state.names.map(function(name) {
                         return (
@@ -106,6 +124,9 @@ class TeamCompare extends Component {
                 </select>           
             </div>            
           </div>
+              
+          
+          
         </form>
           <div class = "row">
             {this.state ? (
@@ -137,7 +158,7 @@ class TeamCompare extends Component {
               this.state.stats2 ? (
                   this.state.stats ? (
                         <div>
-                          <button type="button" class="btn btn-primary"style = {{marginLeft: "490px", marginTop: "20px"}}
+                          <button type="button" class="btn btn-dark"style = {{marginLeft: "490px", marginTop: "20px"}}
                           onClick={this.teamCompare}>
                             See this matchup
                           </button>
