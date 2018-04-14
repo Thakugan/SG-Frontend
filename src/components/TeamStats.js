@@ -26,11 +26,13 @@ class TeamStats extends Component {
       console.log(this.state.league);
       if (this.state.league === "MBB"){
         axios.get("http://54.147.204.57:5000/MBB").then(res => {
-          this.setState({ names: res.data });      
+          this.setState({ names: res.data }); 
+          this.setState({stats: null});     
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
-          this.setState({ names: res.data });      
+          this.setState({ names: res.data });
+          this.setState({stats: null});      
         });
       }
         
@@ -44,8 +46,8 @@ class TeamStats extends Component {
   };
 
   updateDisplay = () => {
-    console.log(this.state.team);
-    axios.get("http://54.147.204.57:5000/team/" + this.state.team).then(res => {
+    console.log(this.state.league);
+    axios.get("http://54.147.204.57:5000/team/"+ this.state.league + "/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
       console.log(this.state.stats);
     });
