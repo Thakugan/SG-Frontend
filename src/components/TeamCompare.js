@@ -12,7 +12,7 @@ class TeamCompare extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://54.147.204.57:5000/names").then(res => {
+    axios.get("http://54.147.204.57:5000/MBB").then(res => {
       this.setState({ names: res.data });      
     });
   }
@@ -26,6 +26,16 @@ class TeamCompare extends Component {
 
   setLeague = () => {
       console.log(this.state.league);
+      if (this.state.league == "MBB"){
+        axios.get("http://54.147.204.57:5000/MBB").then(res => {
+          this.setState({ names: res.data });      
+        });
+      } else {
+        axios.get("http://54.147.204.57:5000/WBB").then(res => {
+          this.setState({ names: res.data });      
+        });
+      }
+        
   };
 
   teamSelected = event => {
@@ -97,8 +107,8 @@ class TeamCompare extends Component {
                       {this.state
                         ? this.state.names.map(function(name) {
                             return (
-                              <option key={name} value={name}>
-                                {name}
+                              <option key={name.team} value={name.team}>
+                                {name.team}
                               </option>
                             );
                           })
@@ -118,8 +128,8 @@ class TeamCompare extends Component {
                       {this.state
                         ? this.state.names.map(function(name) {
                             return (
-                              <option key={name} value={name}>
-                                {name}
+                              <option key={name.team} value={name.team}>
+                                {name.team}
                               </option>
                             );
                           })
