@@ -26,7 +26,7 @@ class TeamCompare extends Component {
 
   setLeague = () => {
       console.log(this.state.league);
-      if (this.state.league == "MBB"){
+      if (this.state.league === "MBB"){
         axios.get("http://54.147.204.57:5000/MBB").then(res => {
           this.setState({ names: res.data });      
         });
