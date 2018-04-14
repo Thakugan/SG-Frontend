@@ -15,6 +15,27 @@ class TeamStats extends Component {
     });
   }
 
+  teamsLeague = event => {
+    if (event.target.value === "Men's Basketball")
+      this.setState({league: "MBB"}, () => {this.setLeague(); });
+    else
+      this.setState({league: "WBB"}, () => {this.setLeague(); });   
+  };
+
+  setLeague = () => {
+      console.log(this.state.league);
+      if (this.state.league === "MBB"){
+        axios.get("http://54.147.204.57:5000/MBB").then(res => {
+          this.setState({ names: res.data });      
+        });
+      } else {
+        axios.get("http://54.147.204.57:5000/WBB").then(res => {
+          this.setState({ names: res.data });      
+        });
+      }
+        
+  };
+
   teamSelected = event => {
     console.log("Team selected: " + event.target.value);
     this.setState({ team: event.target.value }, () => {
@@ -34,34 +55,52 @@ class TeamStats extends Component {
     return (
       <div>
         <h2>Team Stats</h2>
-        <form style={{ width: "50%" }}>
-          <div className="form-group">
+        <form style={{ width: "250px" }}>
+         <div className="form-group" style = {{width: "250px"}}>
             <label htmlFor="team" />
             <select
               className="form-control"
-              id="team"
-              onChange={this.teamSelected}
+              id="league"
+              onChange={this.teamsLeague}
             >
-              <option>Select a Team</option>/>
-              {this.state
-                ? this.state.names.map(function(name) {
-                    return (
-                      <option key={name} value={name}>
-                        {name}
-                      </option>
-                    );
-                  })
-                : null}
+              <option selected="true" disabled="disabled">Select Men or Women</option>
+              <option>Men's Basketball</option>
+              <option>Women's Basketball</option>
             </select>
           </div>
+
+          {this.state ? (
+              this.state.league ? (
+                <div className="form-group">
+                  <label htmlFor="team" />
+                  <select
+                    className="form-control"
+                    id="team"
+                    onChange={this.teamSelected}
+                  >
+                    <option selected="true" disabled="disabled">Select a Team</option>/>
+                    {this.state
+                      ? this.state.names.map(function(name) {
+                          return (
+                            <option key={name.team} value={name.team}>
+                              {name.team}
+                            </option>
+                          );
+                        })
+                      : null}
+                  </select>
+              </div>
+              ) : null
+          ) : null}
+          
         </form>
 
         {this.state ? (
           this.state.stats ? (
             <div>
               <p>Team: {this.state.stats.team}</p>
-              <p>
-                Division: {this.state.stats.division} League:{" "}
+              <p> Division: {this.state.stats.division} </p>
+              <p>League:{" "}
                 {this.state.stats.league}
               </p>
               <p>ORebs: {this.state.stats.ORebs}</p>

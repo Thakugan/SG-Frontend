@@ -12,7 +12,7 @@ class TeamCompare extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://54.147.204.57:5000/MBB").then(res => {
+    axios.get("http://54.147.204.57:5000/names").then(res => {
       this.setState({ names: res.data });      
     });
   }
