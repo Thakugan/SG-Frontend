@@ -55,10 +55,10 @@ class TeamCompare extends Component {
   updateDisplay = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
-      this.setState({ percentageOne: 10});
-      this.setState({ percentageTwo: 10});
-      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
-      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
+      this.setState({ percentageOne: ""});
+      this.setState({ percentageTwo: ""});
+      this.setState({ widthOne: "100px"});
+      this.setState({ widthTwo: "100px"});
       this.setState({ comparison: null});
     });
   };
@@ -66,10 +66,10 @@ class TeamCompare extends Component {
   updateDisplay2 = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team2).then(res => {
       this.setState({ stats2: res.data });
-      this.setState({ percentageOne: 10});
-      this.setState({ percentageTwo: 10});
-      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
-      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
+      this.setState({ percentageOne: ""});
+      this.setState({ percentageTwo: ""});
+      this.setState({ widthOne: "100px"});
+      this.setState({ widthTwo: "100px"});
       this.setState({ comparison: null});
     });
   };
@@ -209,22 +209,6 @@ class TeamCompare extends Component {
               ) : null
           ) : null}
         </div>
-        {this.state ? (
-            this.state.comparison ? (                
-              <div>                
-                <div style={{marginLeft: "60px",marginTop:"60px"}}>
-                  <div style = {{ height:"50px",width:"50px",textAlign:"center",float:"left"}}>
-                  {this.state.percentageOne}%
-                  </div>
-                  <div style = {{ height:"50px",width:"50px",textAlign:"center",float:"left",marginLeft:"900px"}}>
-                  {this.state.percentageTwo}%
-                  </div>
-                  
-                </div>
-              </div> 
-            ) : null
-
-        ) : null}
 
         {this.state ? (
               this.state.stats2 ? (
@@ -239,13 +223,13 @@ class TeamCompare extends Component {
                           <div style = {{background:"blue", height:"50px",width:this.state.widthOne, 
                           float:'left',textAlign:"center", fontSize:"75%",
                           webkitTransitionProperty: "width",webkitTransitionDuration: "1s"}}>
-                          {this.state.stats.team}
+                          {this.state.percentageOne}%
                           </div>
                           <div style = {{background:"green", height:"50px",width:this.state.widthTwo,
                           float:'left',textAlign:'center',fontSize:"75%",
                           webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
                           }}>
-                          {this.state.stats2.team}
+                          {this.state.percentageTwo}%
                           </div>
                         </div>
                       </div>  
