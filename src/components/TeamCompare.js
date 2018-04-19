@@ -25,16 +25,24 @@ class TeamCompare extends Component {
   };
 
   setLeague = () => {
-      console.log(this.state.league);
+      //console.log(this.state.league);
       if (this.state.league === "MBB"){
         axios.get("http://54.147.204.57:5000/MBB").then(res => {
           this.setState({ names: res.data });    
           this.setState({ comparison: null});
+          this.setState({ percentageOne: ""});
+          this.setState({ percentageTwo: ""});
+          this.setState({ widthOne: "100px"});
+          this.setState({ widthTwo: "100px"});
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
           this.setState({ names: res.data }); 
           this.setState({ comparison: null });
+          this.setState({ percentageOne: ""});
+          this.setState({ percentageTwo: ""});
+          this.setState({ widthOne: "100px"});
+          this.setState({ widthTwo: "100px"});
         });
       }
         
@@ -219,15 +227,17 @@ class TeamCompare extends Component {
                           See this matchup
                         </button>
                         
-                        <div style={{marginLeft: "60px",marginTop:"60px"}}>
+                        <div style={{marginLeft: "60px",marginTop:"20px"}}>
                           <div style = {{background:"blue", height:"50px",width:this.state.widthOne, 
-                          float:'left',textAlign:"center", fontSize:"75%",
-                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s"}}>
+                          float:'left',textAlign:"center", fontSize:"100%",
+                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
+                          lineHeight: "50px", overflow: "hidden", marginBottom: "30px"}}>
                           {this.state.percentageOne}%
                           </div>
                           <div style = {{background:"green", height:"50px",width:this.state.widthTwo,
-                          float:'left',textAlign:'center',fontSize:"75%",
+                          float:'left',textAlign:'center',fontSize:"100%",
                           webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
+                          lineHeight: "50px", overflow: "hidden",marginBottom:"30px"
                           }}>
                           {this.state.percentageTwo}%
                           </div>
