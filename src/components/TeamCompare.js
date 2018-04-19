@@ -80,8 +80,8 @@ class TeamCompare extends Component {
       this.setState({ comparison: res.data });
       var numbers = this.state.comparison.split(" ");
       
-      this.setState({ percentageOne: parseInt(numbers[0])});
-      this.setState({ percentageTwo: parseInt(numbers[1])});
+      this.setState({ percentageOne: parseInt(numbers[0], radix)});
+      this.setState({ percentageTwo: parseInt(numbers[1], radix)});
       this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
       this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
     });
