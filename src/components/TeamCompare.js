@@ -28,11 +28,13 @@ class TeamCompare extends Component {
       console.log(this.state.league);
       if (this.state.league === "MBB"){
         axios.get("http://54.147.204.57:5000/MBB").then(res => {
-          this.setState({ names: res.data });      
+          this.setState({ names: res.data });    
+          this.setState({ comparison: null});
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
-          this.setState({ names: res.data });     
+          this.setState({ names: res.data }); 
+          this.setState({ comparison: null });
         });
       }
         
@@ -53,12 +55,22 @@ class TeamCompare extends Component {
   updateDisplay = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team).then(res => {
       this.setState({ stats: res.data });
+      this.setState({ percentageOne: 10});
+      this.setState({ percentageTwo: 10});
+      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
+      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
+      this.setState({ comparison: null});
     });
   };
 
   updateDisplay2 = () => {
     axios.get("http://54.147.204.57:5000/team/" + this.state.league + "/" + this.state.team2).then(res => {
       this.setState({ stats2: res.data });
+      this.setState({ percentageOne: 10});
+      this.setState({ percentageTwo: 10});
+      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
+      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
+      this.setState({ comparison: null});
     });
   };
 
@@ -66,6 +78,12 @@ class TeamCompare extends Component {
     axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2
     + "/" + this.state.league).then(res => {
       this.setState({ comparison: res.data });
+      var numbers = this.state.comparison.split(" ");
+      
+      this.setState({ percentageOne: parseInt(numbers[0])});
+      this.setState({ percentageTwo: parseInt(numbers[1])});
+      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
+      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
     });
   };
 
@@ -150,7 +168,18 @@ class TeamCompare extends Component {
                   <p>
                     Division: {this.state.stats.division}                    
                   </p>
-                  
+                  <p>
+                    League: {this.state.stats.league}                    
+                  </p>  
+                  <p>
+                    FG3: {this.state.stats.FG3}                    
+                  </p>
+                  <p>
+                    TO: {this.state.stats.TO}                    
+                  </p> 
+                  <p>
+                    WL: {this.state.stats.WL}                    
+                  </p> 
                 </div>
               ) : null
           ) : null}
@@ -162,6 +191,18 @@ class TeamCompare extends Component {
                   <h4>Team: {this.state.stats2.team}</h4>
                   <p>
                     Division: {this.state.stats2.division}                    
+                  </p> 
+                  <p>
+                    League: {this.state.stats2.league}                    
+                  </p>  
+                  <p>
+                    FG3: {this.state.stats2.FG3}                    
+                  </p>
+                  <p>
+                    TO: {this.state.stats2.TO}                    
+                  </p> 
+                  <p>
+                    WL: {this.state.stats2.WL}                    
                   </p>                  
                   
                 </div>
@@ -169,30 +210,57 @@ class TeamCompare extends Component {
           ) : null}
         </div>
         {this.state ? (
+            this.state.comparison ? (                
+              <div>                
+                <div style={{marginLeft: "60px",marginTop:"60px"}}>
+                  <div style = {{ height:"50px",width:"50px",textAlign:"center",float:"left"}}>
+                  {this.state.percentageOne}%
+                  </div>
+                  <div style = {{ height:"50px",width:"50px",textAlign:"center",float:"left",marginLeft:"900px"}}>
+                  {this.state.percentageTwo}%
+                  </div>
+                  
+                </div>
+              </div> 
+            ) : null
+
+        ) : null}
+
+        {this.state ? (
               this.state.stats2 ? (
                   this.state.stats ? (
-                        <div>
-                          <button type="button" class="btn btn-dark"style = {{marginLeft: "490px", marginTop: "20px"}}
-                          onClick={this.teamCompare}>
-                            See this matchup
-                          </button>
-                          
-
-                        </div>
+                      <div>  
+                        <button type="button" class="btn btn-dark"style = {{marginLeft: "490px", marginTop: "20px"}}
+                        onClick={this.teamCompare}>
+                          See this matchup
+                        </button>
                         
+                        <div style={{marginLeft: "60px",marginTop:"60px"}}>
+                          <div style = {{background:"blue", height:"50px",width:this.state.widthOne, 
+                          float:'left',textAlign:"center", fontSize:"75%",
+                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s"}}>
+                          {this.state.stats.team}
+                          </div>
+                          <div style = {{background:"green", height:"50px",width:this.state.widthTwo,
+                          float:'left',textAlign:'center',fontSize:"75%",
+                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
+                          }}>
+                          {this.state.stats2.team}
+                          </div>
+                        </div>
+                      </div>  
                   ) : null
                   
               ) : null
           ) : null}
 
-        {this.state ? (
-            this.state.comparison ? (
-                <p> 
-                  {this.state.comparison}
-                </p>
-            ) : null
+        
 
-        ) : null}
+        
+        
+        
+        
+        
       </div>
     );
   }
