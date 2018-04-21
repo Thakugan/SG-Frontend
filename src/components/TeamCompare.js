@@ -34,6 +34,9 @@ class TeamCompare extends Component {
           this.setState({ percentageTwo: ""});
           this.setState({ widthOne: "100px"});
           this.setState({ widthTwo: "100px"});
+          this.setState({ sameTeams: false});
+          this.setState({ team1Missing: false});
+          this.setState({ team2Missing: false});
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
@@ -43,6 +46,9 @@ class TeamCompare extends Component {
           this.setState({ percentageTwo: ""});
           this.setState({ widthOne: "100px"});
           this.setState({ widthTwo: "100px"});
+          this.setState({ sameTeams: false});
+          this.setState({ team1Missing: false});
+          this.setState({ team2Missing: false});
         });
       }
         
@@ -68,6 +74,9 @@ class TeamCompare extends Component {
       this.setState({ widthOne: "100px"});
       this.setState({ widthTwo: "100px"});
       this.setState({ comparison: null});
+      this.setState({ sameTeams: false});
+      this.setState({ team1Missing: false});
+      this.setState({ team2Missing: false});
     });
   };
 
@@ -79,20 +88,51 @@ class TeamCompare extends Component {
       this.setState({ widthOne: "100px"});
       this.setState({ widthTwo: "100px"});
       this.setState({ comparison: null});
+      this.setState({ sameTeams: false});
+      this.setState({ team1Missing: false});
+      this.setState({ team2Missing: false});
     });
   };
 
   teamCompare = event => {
-    axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2
-    + "/" + this.state.league).then(res => {
-      this.setState({ comparison: res.data });
-      var numbers = this.state.comparison.split(" ");
-      
-      this.setState({ percentageOne: +numbers[0]});
-      this.setState({ percentageTwo: +numbers[1]});
-      this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
-      this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
-    });
+    //fails if two of the same team selected or either team is missing stats
+    if (this.state.team === this.state.team2 ||
+      (!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
+        || !this.state.stats.FTA || !this.state.stats.FGA || !this.state.stats.TO
+        || !this.state.stats.FT || !this.state.stats.WL || !this.state.stats.FGM) ||
+      (!this.state.stats2.ORebs || !this.state.stats2.DRebs || !this.state.stats2.FG3
+        || !this.state.stats2.FTA || !this.state.stats2.FGA || !this.state.stats2.TO
+        || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)){
+
+      if (this.state.team === this.state.team2)
+        this.setState({ sameTeams: true}); 
+
+      if (!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
+      || !this.state.stats.FTA || !this.state.stats.FGA || !this.state.stats.TO
+      || !this.state.stats.FT || !this.state.stats.WL || !this.state.stats.FGM)
+        this.setState({ team1Missing: true});
+
+      if (!this.state.stats2.ORebs || !this.state.stats2.DRebs || !this.state.stats2.FG3
+      || !this.state.stats2.FTA || !this.state.stats2.FGA || !this.state.stats2.TO
+      || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)
+        this.setState({ team2Missing: true});
+               
+    } else { //else compare can be done
+      this.setState({ sameTeams: false});
+      this.setState({ team1Missing: false});
+      this.setState({ team2Missing: false});
+
+      axios.get("http://54.147.204.57:5000/compare/" + this.state.team + "/" + this.state.team2
+      + "/" + this.state.league).then(res => {
+        this.setState({ comparison: res.data });
+        var numbers = this.state.comparison.split(" ");
+        
+        this.setState({ percentageOne: +numbers[0]});
+        this.setState({ percentageTwo: +numbers[1]});
+        this.setState({ widthOne: this.state.percentageOne * 10 + "px"});
+        this.setState({ widthTwo: this.state.percentageTwo * 10 + "px"});
+      });
+    }
   };
 
   
@@ -217,6 +257,26 @@ class TeamCompare extends Component {
               ) : null
           ) : null}
         </div>
+
+        {this.state.sameTeams ? (
+        <div class="alert alert-danger" style = {{width: "50%", margin:"auto"}}>
+          Please select different teams.
+        </div>
+        ) : null }
+
+        {this.state.team1Missing ? (
+        <div class="alert alert-danger" style = {{width: "50%", margin:"auto",marginTop:"5px"}}>
+          It appears that {this.state.team} has one or more empty stats. Both teams must have 
+          all stats available to see a matchup. Please select a different team.
+        </div>
+        ) : null }
+
+        {this.state.team2Missing ? (
+        <div class="alert alert-danger" style = {{width: "50%", margin:"auto",marginTop:"5px"}}>
+          It appears that {this.state.team2} has one or more empty stats. Both teams must have 
+          all stats available to see a matchup. Please select a different team.
+        </div>
+        ) : null }
 
         {this.state ? (
               this.state.stats2 ? (
