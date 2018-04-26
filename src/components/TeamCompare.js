@@ -288,13 +288,13 @@ class TeamCompare extends Component {
                         </button>
                         
                         <div style={{marginLeft: "60px",marginTop:"20px"}}>
-                          <div style = {{background:"blue", height:"50px",width:this.state.widthOne, 
+                          <div style = {{background:"orange", height:"50px",width:this.state.widthOne, 
                           float:'left',textAlign:"center", fontSize:"100%",
                           webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
                           lineHeight: "50px", overflow: "hidden", marginBottom: "30px"}}>
                           {this.state.percentageOne}%
                           </div>
-                          <div style = {{background:"green", height:"50px",width:this.state.widthTwo,
+                          <div style = {{background:"purple", height:"50px",width:this.state.widthTwo,
                           float:'left',textAlign:'center',fontSize:"100%",
                           webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
                           lineHeight: "50px", overflow: "hidden",marginBottom:"30px"
