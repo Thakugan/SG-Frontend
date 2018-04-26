@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import PieChart from 'react-minimal-pie-chart';
 
 class TeamCompare extends Component {
   
@@ -286,6 +287,13 @@ class TeamCompare extends Component {
                         onClick={this.teamCompare}>
                           See this matchup
                         </button>
+
+                        <PieChart style={{width: "100px",height:"100px"}}
+                          data={[
+                            { value: this.state.percentageOne, key: 1, color: '#E38627' },
+                            { value: this.state.percentageTwo, key: 2, color: '#C13C37' },
+                          ]}
+                          />
                         
                         <div style={{marginLeft: "60px",marginTop:"20px"}}>
                           <div style = {{background:"orange", height:"50px",width:this.state.widthOne, 
