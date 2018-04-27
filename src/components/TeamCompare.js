@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import PieChart from 'react-minimal-pie-chart';
 
 class TeamCompare extends Component {
   
@@ -183,7 +184,7 @@ class TeamCompare extends Component {
                   
                 </div>
                 
-                <div className="form-group" style = {{marginLeft: "424px"}}>           
+                <div className="form-group" style = {{marginLeft: "424px",marginTop:"1px"}}>           
                     <label htmlFor="team" />
                     <select
                       className="form-control"
@@ -211,7 +212,7 @@ class TeamCompare extends Component {
           <div class = "row">
             {this.state ? (
               this.state.stats ? (
-                <div style = {{marginLeft: "15px"}}>
+                <div style = {{marginLeft: "15px", width:"300px"}}>
                   <h4>Team: {this.state.stats.team}</h4>
                   <p>
                     Division: {this.state.stats.division}                    
@@ -232,7 +233,21 @@ class TeamCompare extends Component {
               ) : null
           ) : null}
 
-          
+          {this.state ? (
+            this.state.stats ? (
+              this.state.stats2 ? (
+                <PieChart style={{width: "200px",height:"200px", marginLeft: "165px",marginTop:"10px"
+              }}
+                  data={[
+                    { value: this.state.percentageOne, key: 1, color: 'orange' },
+                    { value: this.state.percentageTwo, key: 2, color: 'purple' },
+                  ]}
+                  startAngle = {90}
+                  />
+              ): null
+            ) : null
+          ) : null}
+
           {this.state ? (
               this.state.stats2 ? (
                 <div style = {{marginLeft: "auto"}}>
@@ -306,6 +321,7 @@ class TeamCompare extends Component {
                     </button>
 
                   </div> 
+                      
                   ) : null
                   
               ) : null
