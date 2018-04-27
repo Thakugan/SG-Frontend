@@ -236,14 +236,23 @@ class TeamCompare extends Component {
           {this.state ? (
             this.state.stats ? (
               this.state.stats2 ? (
+                <div>
+                <h2 style={{marginLeft:"50px", color:"orange",
+                fontSize:"200%", float:"left",width:"50px"}}>{this.state.percentageOne}</h2>
+                <h2 style = {{float:"left",width:"50px",color:"orange"}}>%</h2>
+                <h2 style={{marginLeft:"250px", color:"purple",
+                fontSize:"200%", float:"left",width:"50px"}}>{this.state.percentageTwo}</h2>
+                <h2 style = {{float:"left", width:"50px",color:"purple"}}>%</h2>
                 <PieChart style={{width: "200px",height:"200px", marginLeft: "165px",marginTop:"10px"
               }}
+               
                   data={[
                     { value: this.state.percentageOne, key: 1, color: 'orange' },
                     { value: this.state.percentageTwo, key: 2, color: 'purple' },
                   ]}
                   startAngle = {90}
                   />
+                  </div>
               ): null
             ) : null
           ) : null}
@@ -298,24 +307,8 @@ class TeamCompare extends Component {
                   this.state.stats ? (
                     <div>  
 
-                    <div class = "row">
-                    <div style={{marginLeft: "70px",marginTop:"20px"}}>
-                      <div style = {{background:"orange", height:"50px",width:this.state.widthOne, 
-                      float:'left',textAlign:"center", fontSize:"100%",
-                      webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
-                      lineHeight: "50px", overflow: "hidden", marginBottom: "10px"}}>
-                      {this.state.percentageOne}%
-                      </div>
-                      <div style = {{background:"purple", height:"50px",width:this.state.widthTwo,
-                      float:'left',textAlign:'center',fontSize:"100%",
-                      webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
-                      lineHeight: "50px", overflow: "hidden",marginBottom:"10px"
-                      }}>
-                      {this.state.percentageTwo}%
-                      </div>
-                    </div>
-                    </div>
-                    <button type="button" class="btn btn-dark"style = {{marginLeft: "490px"}}
+                    
+                    <button type="button" class="btn btn-dark"style = {{marginLeft: "490px",marginTop:"50px"}}
                     onClick={this.teamCompare}>
                       See this matchup
                     </button>
