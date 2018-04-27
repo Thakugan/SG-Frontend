@@ -281,28 +281,31 @@ class TeamCompare extends Component {
         {this.state ? (
               this.state.stats2 ? (
                   this.state.stats ? (
-                      <div>  
-                        <button type="button" class="btn btn-dark"style = {{marginLeft: "490px", marginTop: "20px"}}
-                        onClick={this.teamCompare}>
-                          See this matchup
-                        </button>
-                        
-                        <div style={{marginLeft: "60px",marginTop:"20px"}}>
-                          <div style = {{background:"orange", height:"50px",width:this.state.widthOne, 
-                          float:'left',textAlign:"center", fontSize:"100%",
-                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
-                          lineHeight: "50px", overflow: "hidden", marginBottom: "30px"}}>
-                          {this.state.percentageOne}%
-                          </div>
-                          <div style = {{background:"purple", height:"50px",width:this.state.widthTwo,
-                          float:'left',textAlign:'center',fontSize:"100%",
-                          webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
-                          lineHeight: "50px", overflow: "hidden",marginBottom:"30px"
-                          }}>
-                          {this.state.percentageTwo}%
-                          </div>
-                        </div>
-                      </div>  
+                    <div>  
+
+                    <div class = "row">
+                    <div style={{marginLeft: "70px",marginTop:"20px"}}>
+                      <div style = {{background:"orange", height:"50px",width:this.state.widthOne, 
+                      float:'left',textAlign:"center", fontSize:"100%",
+                      webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
+                      lineHeight: "50px", overflow: "hidden", marginBottom: "10px"}}>
+                      {this.state.percentageOne}%
+                      </div>
+                      <div style = {{background:"purple", height:"50px",width:this.state.widthTwo,
+                      float:'left',textAlign:'center',fontSize:"100%",
+                      webkitTransitionProperty: "width",webkitTransitionDuration: "1s",
+                      lineHeight: "50px", overflow: "hidden",marginBottom:"10px"
+                      }}>
+                      {this.state.percentageTwo}%
+                      </div>
+                    </div>
+                    </div>
+                    <button type="button" class="btn btn-dark"style = {{marginLeft: "490px"}}
+                    onClick={this.teamCompare}>
+                      See this matchup
+                    </button>
+
+                  </div> 
                   ) : null
                   
               ) : null
