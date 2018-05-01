@@ -209,7 +209,7 @@ class TeamCompare extends Component {
           
           
         </form>
-          <div class = "row">
+          <div class = "row" style = {{marginTop: "20px"}}>
             {this.state ? (
               this.state.stats ? (
                 <div style = {{marginLeft: "15px", width:"300px"}}>
@@ -236,6 +236,7 @@ class TeamCompare extends Component {
           {this.state ? (
             this.state.stats ? (
               this.state.stats2 ? (
+                this.state.comparison ? (
                 <div>
                 <h2 style={{marginLeft:"50px", color:"orange",
                 fontSize:"200%", float:"left",width:"50px"}}>{this.state.percentageOne}</h2>
@@ -251,8 +252,10 @@ class TeamCompare extends Component {
                     { value: this.state.percentageTwo, key: 2, color: 'purple' },
                   ]}
                   startAngle = {90}
+
                   />
                   </div>
+                ): null
               ): null
             ) : null
           ) : null}
