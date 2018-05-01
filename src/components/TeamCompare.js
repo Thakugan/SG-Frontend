@@ -262,7 +262,7 @@ class TeamCompare extends Component {
 
           {this.state ? (
               this.state.stats2 ? (
-                <div style = {{marginLeft: "auto"}}>
+                <div style = {{marginLeft: "auto", width: "300px"}}>
                   <h4>Team: {this.state.stats2.team}</h4>
                   <p>
                     Division: {this.state.stats2.division}                    
@@ -321,15 +321,7 @@ class TeamCompare extends Component {
                   ) : null
                   
               ) : null
-          ) : null}
-
-        
-
-        
-        
-        
-        
-        
+          ) : null} 
       </div>
     );
   }
