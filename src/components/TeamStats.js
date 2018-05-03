@@ -27,7 +27,7 @@ class TeamStats extends Component {
       if (this.state.league === "MBB"){
         axios.get("http://54.147.204.57:5000/MBB").then(res => {
           this.setState({ names: res.data }); 
-          this.setState({ stats: null});     
+          this.setState({ stats: null}, () => {this.resetSelection(); });     
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
