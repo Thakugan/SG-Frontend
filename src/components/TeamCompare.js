@@ -276,10 +276,7 @@ class TeamCompare extends Component {
                   </p>
                   <p>
                     TO: {this.state.stats2.TO}                    
-                  </p> 
-                  <p>
-                    WL: {this.state.stats2.WL}                    
-                  </p>                  
+                  </p>                 
                   
                 </div>
               ) : null
