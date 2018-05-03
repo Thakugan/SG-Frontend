@@ -98,24 +98,27 @@ class TeamCompare extends Component {
   teamCompare = event => {
     //fails if two of the same team selected or either team is missing stats
     if (this.state.team === this.state.team2 ||
-      (!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
+      /*(!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
         || !this.state.stats.FTA || !this.state.stats.FGA || !this.state.stats.TO
         || !this.state.stats.FT || !this.state.stats.WL || !this.state.stats.FGM) ||
       (!this.state.stats2.ORebs || !this.state.stats2.DRebs || !this.state.stats2.FG3
         || !this.state.stats2.FTA || !this.state.stats2.FGA || !this.state.stats2.TO
-        || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)){
+        || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)){*/
+        (!this.state.stats.WL) || (!this.state.stats2.WL)){
 
       if (this.state.team === this.state.team2)
         this.setState({ sameTeams: true}); 
 
-      if (!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
+      /*if (!this.state.stats.ORebs || !this.state.stats.DRebs || !this.state.stats.FG3
       || !this.state.stats.FTA || !this.state.stats.FGA || !this.state.stats.TO
-      || !this.state.stats.FT || !this.state.stats.WL || !this.state.stats.FGM)
+      || !this.state.stats.FT || !this.state.stats.WL || !this.state.stats.FGM)*/
+      if (!this.state.stats.WL)
         this.setState({ team1Missing: true});
 
-      if (!this.state.stats2.ORebs || !this.state.stats2.DRebs || !this.state.stats2.FG3
+      /*if (!this.state.stats2.ORebs || !this.state.stats2.DRebs || !this.state.stats2.FG3
       || !this.state.stats2.FTA || !this.state.stats2.FGA || !this.state.stats2.TO
-      || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)
+      || !this.state.stats2.FT || !this.state.stats2.WL || !this.state.stats2.FGM)*/
+      if (!this.state.stats2.WL)
         this.setState({ team2Missing: true});
                
     } else { //else compare can be done
@@ -226,9 +229,7 @@ class TeamCompare extends Component {
                   <p>
                     TO: {this.state.stats.TO}                    
                   </p> 
-                  <p>
-                    WL: {this.state.stats.WL}                    
-                  </p> 
+                   
                 </div>
               ) : null
           ) : null}
