@@ -25,6 +25,11 @@ class TeamCompare extends Component {
       this.setState({league: "WBB"}, () => {this.setLeague(); });   
   };
 
+  setSelections = () => {
+    document.getElementById("team").value = "first";
+    document.getElementById("team2").value = "first";
+  }
+
   setLeague = () => {
       //console.log(this.state.league);
       if (this.state.league === "MBB"){
@@ -38,6 +43,15 @@ class TeamCompare extends Component {
           this.setState({ sameTeams: false});
           this.setState({ team1Missing: false});
           this.setState({ team2Missing: false});
+          this.setState({ team: null});
+          this.setState({ team2: null});
+          this.setState({ stats: null});
+          this.setState({ stats2: null}, () => {this.setSelections(); });
+
+          
+
+          
+
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
@@ -50,6 +64,13 @@ class TeamCompare extends Component {
           this.setState({ sameTeams: false});
           this.setState({ team1Missing: false});
           this.setState({ team2Missing: false});
+          this.setState({ team: null});
+          this.setState({ team2: null});
+          this.setState({ stats: null});
+          this.setState({ stats2: null});
+          this.setState({ stats2: null}, () => {this.setSelections(); });
+
+          
         });
       }
         
@@ -173,7 +194,7 @@ class TeamCompare extends Component {
                       id="team"
                       onChange={this.teamSelected}
                     >
-                      <option selected="true" disabled="disabled">Select First Team</option>/>
+                      <option selected="true" disabled="disabled" value="first">Select First Team</option>/>
                       {this.state
                         ? this.state.names.map(function(name) {
                             return (
@@ -191,10 +212,10 @@ class TeamCompare extends Component {
                     <label htmlFor="team" />
                     <select
                       className="form-control"
-                      id="team"
+                      id="team2"
                       onChange={this.teamSelected2}                
                     >
-                      <option selected="true" disabled="disabled">Select Second Team</option>/>
+                      <option selected="true" disabled="disabled" value="first">Select Second Team</option>/>
                       {this.state
                         ? this.state.names.map(function(name) {
                             return (
