@@ -32,11 +32,15 @@ class TeamStats extends Component {
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
           this.setState({ names: res.data });
-          this.setState({ stats: null});      
+          this.setState({ stats: null}, () => {this.resetSelection(); });      
         });
       }
         
   };
+
+  resetSelection = () => {
+    document.getElementById("team").value = "first";
+  }
 
   teamSelected = event => {
     console.log("Team selected: " + event.target.value);
@@ -65,7 +69,7 @@ class TeamStats extends Component {
               id="league"
               onChange={this.teamsLeague}
             >
-              <option selected="true" disabled="disabled">Select Men or Women</option>
+              <option selected="true" disabled="disabled" >Select Men or Women</option>
               <option>Men's Basketball</option>
               <option>Women's Basketball</option>
             </select>
@@ -80,7 +84,7 @@ class TeamStats extends Component {
                     id="team"
                     onChange={this.teamSelected}
                   >
-                    <option selected="true" disabled="disabled">Select a Team</option>/>
+                    <option selected="true" disabled="disabled" value="first">Select a Team</option>/>
                     {this.state
                       ? this.state.names.map(function(name) {
                           return (

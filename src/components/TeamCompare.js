@@ -48,10 +48,6 @@ class TeamCompare extends Component {
           this.setState({ stats: null});
           this.setState({ stats2: null}, () => {this.setSelections(); });
 
-          
-
-          
-
         });
       } else {
         axios.get("http://54.147.204.57:5000/WBB").then(res => {
